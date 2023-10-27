@@ -1,14 +1,3 @@
-## Foundry
-
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
-
-Foundry consists of:
-
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
 ## Documentation
 
 https://book.getfoundry.sh/
@@ -45,22 +34,54 @@ $ forge snapshot
 $ anvil
 ```
 
-### Deploy
+# NOTES
+
+# Deployment
+
+## Deploy with Script
+
+`--broadcast` will send the transaction to node/blockchain.
 
 ```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+forge script script/<DeployScript> --rpc-url <RPC_URL> --broadcast --private-key <PRIVATE_KEY>
 ```
 
-### Cast
+## With Shell
+
+To node
 
 ```shell
-$ cast <subcommand>
+forge create <CONTRACT_NAME> --rpc-url <RPC_URL> --interactive
 ```
 
-### Help
+To foundry temporary node
 
 ```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+forge create <CONTRACT_NAME> --interactive
+```
+
+## Cast
+
+### Conversion To decimal
+
+```shell
+cast --to-base <hex_num> dec
+```
+
+### Conversion To Hex
+
+```shell
+cast --to-base <dec_num> hex
+```
+
+### Send transaction to Contract
+
+```shell
+cast send <contract_address> "<functionName>(...<args_type>)" <args> --rpc-url <RPC_URL> --private-key <PRIVATE_KEY>
+```
+
+### Read data from Contract
+
+```shell
+cast call <contract_address> "<functionName>(...<args_type>)" <args> --rpc-url <RPC_URL>
 ```
